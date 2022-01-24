@@ -17,14 +17,23 @@ namespace EcertApp.EcertApiHelper.Implementations
             _http = http;
         }
 
-        public IEnumerable<T> Get(string url)
+        public async Task<IEnumerable<T>> Get(string url)
         {
             var httpClient = _http.HttpClient();
-            var response =  httpClient.GetAsync(url);
-            var responseContent = response.Result.Content.ToString();
-            var data= JsonConvert.DeserializeObject<List<T>>(responseContent);
+            var response = await httpClient.GetAsync(url);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var data = JsonConvert.DeserializeObject<List<T>>(responseContent);
             return data;
         }
+
+        //public async Task IEnumerable<T> Get(string url)
+        //{
+        //    var httpClient = _http.HttpClient();
+        //    var response =  await httpClient.GetAsync("");
+        //    var responseContent = await response.Content.ReadAsStringAsync();
+        //    var data= JsonConvert.DeserializeObject<List<T>>(responseContent);
+        //    return data;
+        //}
 
         public async Task<string> PostCall(T Entity, string url)
         {

@@ -27,7 +27,7 @@ namespace EcertApp.Controllers
 
         public IActionResult Index()
         {
-            var results = _http.Get("https://localhost:44335/api/Categories").ToList();
+            var results = _http.Get("https://localhost:44335/api/Categories").Result.ToList();
             return View(results);
            
         }
