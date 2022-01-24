@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit SA</title>
+
+    <link href="~/Auth/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Auth/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/plugins/images/favicon.png">
+    <link href="~/Auth/css/iofrm-style.css" rel="stylesheet" />
+
+    <link href="~/Auth/css/iofrm-theme22.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="form-body without-side">
+        <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                  
+                   
+                    <img class="logo-size"   src="~/Auth/images/FruitSA_Logo.png" />
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <img src="~/Auth/images/graphic3.svg" />
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Auth/js/jquery.min.js"></script>
+    <script src="~/Auth/js/popper.min.js"></script>
+    <script src="~/Auth/js/bootstrap.min.js"></script>
+    <script src="~/Auth/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

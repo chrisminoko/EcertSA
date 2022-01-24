@@ -1,0 +1,128 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/assets/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>FRUIT SA</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/plugins/images/favicon.png">
+    <link href="~/assets/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+                    <a class="navbar-brand" href="dashboard.html">
+
+                        <span class="logo-text">
+                            <!-- dark Logo text -->
+                            <img src="~/assets/plugins/images/logo-text.png" alt="homepage" />
+                        </span>
+                    </a>
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                       href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+                        <li>
+                            <partial name="_LoginPartial" />
+                            @*<a class="profile-pic" href="#">
+                                    <img src="~/assets/plugins/images/users/varun.jpg" alt="user-img" width="36"
+                                         class="img-circle"><span class="text-white font-medium">Steave</span>
+                                </a>*@
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <div class="scroll-sidebar">
+
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+
+                        <li class="sidebar-item pt-2">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+                               aria-expanded="false">
+                                <i class="far fa-clock" aria-hidden="true"></i>
+                                <span class="hide-menu">Home</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+                               aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span class="hide-menu">Products</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+                               aria-expanded="false">
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                                <span class="hide-menu">Catergory</span>
+                            </a>
+                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                    <li class="text-center p-20 upgrade-btn">
+                      
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="btn d-grid btn-danger  text-white">Logout</button>
+                        </form>
+                    </li>
+                        }
+                        else
+                        {
+                            <li class="text-center p-20 upgrade-btn">
+                                <a asp-area="Identity" asp-page="/Account/Login"
+                                   class="btn d-grid btn-success text-white" >
+                                    Sign in
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+
+                </nav>
+            </div>
+        </aside>
+        <div class="page-wrapper">
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Dashboard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+
+    <script src="~/assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="~/assets/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/app-style-switcher.js"></script>
+    <script src="~/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/assets/js/waves.js"></script>
+    <script src="~/assets/js/sidebarmenu.js"></script>
+    <script src="~/assets/js/custom.js"></script>
+    <script src="~/assets/js/pages/dashboards/dashboard1.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
