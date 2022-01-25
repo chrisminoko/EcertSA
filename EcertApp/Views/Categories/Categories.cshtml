@@ -1,4 +1,4 @@
-﻿
+﻿@model PagedResult<EcertApp.Models.Category>
 @{
     ViewData["Title"] = "Categories";
     var Categories = ViewBag.Categories;
@@ -25,31 +25,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var category in Categories)
+                            @{ var i = 1; }
+                            @foreach (var category in Model.Results)
                             {
-                            <tr>
-                                <td>@category.CategoryId</td>
-                                <td>@category.Name</td>
-                                <td>@category.CategoryCode</td>
-                                <td>@category.IsActive</td>
-                                <td>
-                                    <a asp-action="GetCategory" asp-route-id="@category.CategoryId">
-                                        <img src="/eye.png" />
-                                    </a>
-                                </td>
+                                <tr>
+                                    <td>@category.CategoryId</td>
+                                    <td>@category.Name</td>
+                                    <td>@category.CategoryCode</td>
+                                    <td>@category.IsActive</td>
+                                    <td>
+                                        <a asp-action="GetCategory" asp-route-id="@category.CategoryId">
+                                            <img src="/eye.png" />
+                                        </a>
+                                    </td>
 
-                                <td>
-                                    <a asp-action="GetCategory" asp-route-id="@category.CategoryId">
-                                        <img src="/edit.png" />
-                                    </a>
-                                </td>
-                                <td>
-                                    <form asp-action="DeleteReservation" method="post">
-                                        <input type="hidden" value="@category.CategoryId" name="ReservationId" />
-                                        <input type="image" src="/remove.png" />
-                                    </form>
-                                </td>
-                            </tr>
+                                    <td>
+                                        <a asp-action="GetCategory" asp-route-id="@category.CategoryId">
+                                            <img src="/edit.png" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form asp-action="DeleteReservation" method="post">
+                                            <input type="hidden" value="@category.CategoryId" name="ReservationId" />
+                                            <input type="image" src="/remove.png" />
+                                        </form>
+                                    </td>
+                                </tr>
 
                             }
 
@@ -57,6 +58,7 @@
                         </tbody>
 
                     </table>
+                    @(await Component.InvokeAsync<PagerViewComponent>(Model))
                 </div>
             </div>
         </div>

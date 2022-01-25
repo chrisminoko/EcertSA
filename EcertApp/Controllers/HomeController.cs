@@ -32,6 +32,10 @@ namespace EcertApp.Controllers
             return View(results);
            
         }
+        public IActionResult Default()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
