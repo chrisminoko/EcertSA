@@ -18,8 +18,8 @@ namespace EcertApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHttpLogic<Category> _http;
-        public HomeController(ILogger<HomeController> logger, IHttpLogic<Category> http)
+        private readonly IHttpLogic<Models.Category> _http;
+        public HomeController(ILogger<HomeController> logger, IHttpLogic<Models.Category> http)
         {
             _logger = logger;
             _http = http;
@@ -28,6 +28,7 @@ namespace EcertApp.Controllers
         public IActionResult Index()
         {
             var results = _http.Get("https://localhost:44335/api/Categories").Result.ToList();
+            ViewBag.Categories = results;
             return View(results);
            
         }

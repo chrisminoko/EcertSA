@@ -1,0 +1,34 @@
+﻿@model EcertApp.Models.Category
+
+<h2>Add a Reservation <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a></h2>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card white-box p-0 center-block">
+            <div class="card-heading">
+                <h3 class="box-title mb-0">Recent Categories</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateCategory" method="post">
+                    <div class="form-group">
+                        <label for="Name">Name:</label>
+                        <input class="form-control" name="Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="CategoryCode">Start Location:</label>
+                        <input class="form-control" name="CategoryCode" />
+                    </div>
+                    <div class="form-group">
+                        <label for="IsActive">End Location:</label>
+                        <input type="checkbox" class="form-control" name="IsActive" />
+                    </div>
+                    <div class="text-center panel-body">
+                        <button type="submit" class="btn btn-sm btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+</div>
+

@@ -1,20 +1,16 @@
-﻿@{ 
+﻿
+@{ Layout = "_Layout"; ViewBag.Title = "Get Reservation by Id";
 
+    var category = ViewBag.Category;
+}
+
+@{
+    ViewData["Title"] = "Categories";
     var Categories = ViewBag.Categories;
 }
+
 <div class="row">
-  
-    <div class="col-md-12 col-lg-8 col-sm-12">
-        <div class="card white-box p-0">
-            <div class="card-body">
-                <h3 class="box-title mb-0">Recent Products</h3>
-            </div>
-            <div class="comment-widgets">
-     
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-12 col-sm-12">
+    <div class="col-md-12">
         <div class="card white-box p-0">
             <div class="card-heading">
                 <h3 class="box-title mb-0">Recent Categories</h3>
@@ -31,23 +27,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var category in Categories)
-                            {
-                            <tr>
-                                <td>@category.CategoryId</td>
-                                <td>@category.Name</td>
-                                <td>@category.CategoryCode</td> 
-                                <td>@category.IsActive</td>
-                            </tr>
-
-                            }
-
-
+                                <tr>
+                                    <td>@category.CategoryId</td>
+                                    <td>@category.Name</td>
+                                    <td>@category.CategoryCode</td>
+                                    <td>@category.IsActive</td>
+                                </tr>
                         </tbody>
-                    
+
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

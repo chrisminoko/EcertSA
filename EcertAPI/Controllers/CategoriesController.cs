@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,6 +22,8 @@ namespace EcertAPI.Controllers
             _logger = logger;
         }
 
+     
+
         [HttpGet]
         public IActionResult GetCategories()
         {
@@ -29,19 +32,32 @@ namespace EcertAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCompany(int id)
+        public IActionResult GetCategory(int id)
         {
             var company = _repository.Category.GetCategory(id, trackChanges: false);
             if (company == null)
             {
-                _logger.LogInfo($"Company with id : {id} doesn't exist in the database.");
+                _logger.LogInfo($"Category with id : {id} doesn't exist in the database.");
                 return NotFound();
             }
             else
             {
-
                 return Ok(company);
             }
+        }
+
+        [HttpPost]
+        public IActionResult CreateCompany([FromBody] Category category)
+        {
+            if (category==null)
+            {
+                _logger.LogError("category object sent from client is null.");
+                return BadRequest("category object is null");
+            }
+            _repository.Category.CreateCategory(category);
+            _repository.Save();
+            return Ok();
+            //return CreatedAtRoute("CategoryById", new { id = category.CategoryId }, category);
         }
     }
 }

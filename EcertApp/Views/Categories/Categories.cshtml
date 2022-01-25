@@ -1,20 +1,11 @@
-﻿@{ 
-
+﻿
+@{
+    ViewData["Title"] = "Categories";
     var Categories = ViewBag.Categories;
 }
+
 <div class="row">
-  
-    <div class="col-md-12 col-lg-8 col-sm-12">
-        <div class="card white-box p-0">
-            <div class="card-body">
-                <h3 class="box-title mb-0">Recent Products</h3>
-            </div>
-            <div class="comment-widgets">
-     
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-12 col-sm-12">
+    <div class="col-md-12">
         <div class="card white-box p-0">
             <div class="card-heading">
                 <h3 class="box-title mb-0">Recent Categories</h3>
@@ -28,6 +19,9 @@
                                 <th>Name</th>
                                 <th>Code</th>
                                 <th>Status</th>
+                                <th>Details</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,18 +30,36 @@
                             <tr>
                                 <td>@category.CategoryId</td>
                                 <td>@category.Name</td>
-                                <td>@category.CategoryCode</td> 
+                                <td>@category.CategoryCode</td>
                                 <td>@category.IsActive</td>
+                                <td>
+                                    <a asp-action="GetCategory" asp-route-id="@category.CategoryId">
+                                        <img src="/eye.png" />
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a asp-action="GetCategory" asp-route-id="@category.CategoryId">
+                                        <img src="/edit.png" />
+                                    </a>
+                                </td>
+                                <td>
+                                    <form asp-action="DeleteReservation" method="post">
+                                        <input type="hidden" value="@category.CategoryId" name="ReservationId" />
+                                        <input type="image" src="/remove.png" />
+                                    </form>
+                                </td>
                             </tr>
 
                             }
 
 
                         </tbody>
-                    
+
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

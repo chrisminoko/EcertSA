@@ -26,14 +26,21 @@ namespace EcertApp.EcertApiHelper.Implementations
             return data;
         }
 
-        //public async Task IEnumerable<T> Get(string url)
-        //{
-        //    var httpClient = _http.HttpClient();
-        //    var response =  await httpClient.GetAsync("");
-        //    var responseContent = await response.Content.ReadAsStringAsync();
-        //    var data= JsonConvert.DeserializeObject<List<T>>(responseContent);
-        //    return data;
-        //}
+        public async Task<T> GetbyId(int id, string url)
+        {
+            var httpClient = _http.HttpClient();
+            var response = await httpClient.GetAsync(url+id);
+            if (response.StatusCode==System.Net.HttpStatusCode.OK)
+            {
+             var responseContent= await response.Content.ReadAsStringAsync();
+
+             var data = JsonConvert.DeserializeObject<T>(responseContent);
+
+                return  data;
+            }
+
+            throw new NotImplementedException();
+        }
 
         public async Task<string> PostCall(T Entity, string url)
         {

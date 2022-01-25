@@ -9,6 +9,7 @@ namespace EcertApp.EcertApiHelper.Implementations
     public interface IHttpLogic<T>
     {
         Task<string> PostCall(T Entity, string url);
-        Task <IEnumerable<T>> Get(string url);
+        Task<IEnumerable<T>> Get(string url);
+        Task<T> GetbyId(int id, string url);
     }
 }
