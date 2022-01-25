@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcertAPI", "EcertAPI\EcertAPI.csproj", "{ED4BAAE4-2970-4E61-A597-EADD883FFE7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcertAPI", "EcertAPI\EcertAPI.csproj", "{ED4BAAE4-2970-4E61-A597-EADD883FFE7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{F3EB7435-E4FC-4BE5-8454-F7E1AA88F713}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{F3EB7435-E4FC-4BE5-8454-F7E1AA88F713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{84F124AD-CFF3-4F38-B362-6F08030B1E5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{84F124AD-CFF3-4F38-B362-6F08030B1E5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{9D7A2FD1-61C2-4CC9-949D-495C3DB608FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{9D7A2FD1-61C2-4CC9-949D-495C3DB608FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{29857D76-E965-402D-AB5A-085CA408535D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{29857D76-E965-402D-AB5A-085CA408535D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcertApp", "EcertApp\EcertApp.csproj", "{C5C6991F-86A4-4D79-BB02-9A00F496EE14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcertApp", "EcertApp\EcertApp.csproj", "{C5C6991F-86A4-4D79-BB02-9A00F496EE14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

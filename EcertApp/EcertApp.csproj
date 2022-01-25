@@ -194,6 +194,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NLog" Version="4.7.13" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
 
@@ -228,6 +229,12 @@
     <Folder Include="wwwroot\assets\libs\table-edits\src\" />
     <Folder Include="wwwroot\assets\libs\toastr\tests\" />
     <Folder Include="wwwroot\assets\libs\twitter-bootstrap-wizard\examples\" />
+    <Folder Include="wwwroot\Image\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
   </ItemGroup>
 
 </Project>

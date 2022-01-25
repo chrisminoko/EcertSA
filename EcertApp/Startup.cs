@@ -1,7 +1,11 @@
+using Contracts;
+using EcertApp.BLL.Contracts;
+using EcertApp.BLL.Implementation;
 using EcertApp.Data;
 using EcertApp.EcertApiHelper.Implementations;
 using EcertApp.EcertApiHelper.Interfaces;
 using EcertApp.Models;
+using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,8 +15,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +29,7 @@ namespace EcertApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
         }
 
         public IConfiguration Configuration { get; }
@@ -36,7 +43,10 @@ namespace EcertApp
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddScoped(typeof(IHttpLogic<>), typeof(HttpLogic<>));
+            services.AddScoped<ILoggerManager, LoggerManager>();
             services.AddScoped<IHttpClientHelper, HttpClientHelper>();
+            services.AddScoped<ICategoryBll, CategoryBll>();
+            services.AddScoped<IProductBll, ProductBll>();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

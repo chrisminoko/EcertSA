@@ -17,5 +17,18 @@ namespace Repository
         {
 
         }
+
+        public IEnumerable<Product> GetAllProducts(bool trackChanges) =>
+           FindAll(trackChanges)
+           .OrderBy(c => c.ProductName)
+           .ToList();
+
+        public Product GetProduct(int ProductId, bool trackChanges) =>
+        FindByCondition(c => c.CategoryId.Equals(ProductId), trackChanges)
+        .SingleOrDefault();
+
+        public void CreateProduct(Product product) => Create(product);
+
+        public void DeleteProduct(Product product) { Delete(product); }
     }
 }

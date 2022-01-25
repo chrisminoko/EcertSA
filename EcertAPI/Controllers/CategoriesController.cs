@@ -56,7 +56,6 @@ namespace EcertAPI.Controllers
             _repository.Category.CreateCategory(category);
             _repository.Save();
             return Ok();
-            //return CreatedAtRoute("CategoryById", new { id = category.CategoryId }, category);
         }
 
         [HttpDelete("{categoryId}")]

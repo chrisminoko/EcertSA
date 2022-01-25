@@ -1,74 +1,85 @@
-﻿using EcertApp.Dto;
-using EcertApp.EcertApiHelper.Implementations;
-using EcertApp.Models;
+﻿using Contracts;
+using EcertApp.BLL.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System.Linq;
 
 
 namespace EcertApp.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly IHttpLogic<Models.Category> _http;
-        private readonly IOptions<ApiUrl> _appSettings;
-        public CategoriesController(IHttpLogic<Models.Category> http, IOptions<ApiUrl> app)
+        private readonly ICategoryBll _db;
+        private readonly ILoggerManager _logger;
+        public CategoriesController(ICategoryBll db,ILoggerManager logger)
         {
-            _http = http;
-            _appSettings = app;
+            _db = db;
         }
         public IActionResult Index()
         {
-
             return View();
         }
-        public IActionResult CreateCategory() 
+        public IActionResult CreateCategory()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult CreateCategory(Models.Category category)
+        public IActionResult CreateCategory( Models.Category category)
         {
-            var baseurl = _appSettings.Value.BaseUrl + "Categories";
-            var reponse = _http.PostCall(category, baseurl);
-            return RedirectToAction("Categories");
-        }
-
-        public  IActionResult Categories(int page = 1)
-        {
-            var baseurl = _appSettings.Value.BaseUrl+ "Categories";
-            var results =  _http.Get(baseurl).Result.ToList();
-            var pagedData = results.GetPaged(page, 10);
-            PagedResult<Models.Category> pagedResult = new()
+            try
             {
-                CurrentPage = pagedData.CurrentPage,
-                PageCount = pagedData.PageCount,
-                RowCount = pagedData.RowCount
-            };
-
-            ViewBag.Categories = pagedResult;
-            foreach (var category in pagedData.Results)
-            {
-                pagedResult.Results.Add(category);
+                _db.CreateCategory(category);
+                return RedirectToAction("Categories");
             }
-            return View(pagedData);
-        }
+            catch (System.Exception ex)
+            {
 
-        public IActionResult GetCategory(int id) 
-        {
-            var baseurl = _appSettings.Value.BaseUrl + "Categories/";
-            var results = _http.GetbyId(id, baseurl).Result;
-            ViewBag.Category = results;
-            return View();
+                _logger.LogError($"Something went wrong : { ex.Message} ");
+                return BadRequest();
+            }
         }
-       
+        public IActionResult Categories(int page = 1)
+        {
+            try
+            {
+                var pagedData = _db.GetCategories(page);
+                return View(pagedData);
+            }
+            catch (System.Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong : { ex.Message} ");
+                return BadRequest();
+            }
+
+        }
+        public IActionResult GetCategory(int id)
+        {
+            try
+            {
+                var results = _db.GetCategory(id);
+                ViewBag.Category = results;
+                return View();
+            }
+            catch (System.Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong : { ex.Message} ");
+                return BadRequest();
+            }
+
+        }
         public IActionResult DeleteCategory(int CategoryId)
         {
-            var baseurl = _appSettings.Value.BaseUrl + $"Categories/{CategoryId}";
-            var results = _http.Delete( baseurl);
-      
-            return RedirectToAction("Categories");
+            try
+            {
+                _db.DeleteCategory(CategoryId);
+                return RedirectToAction("Categories");
+            }
+            catch (System.Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong : { ex.Message} ");
+                return BadRequest();
+            }
         }
     }
 }
