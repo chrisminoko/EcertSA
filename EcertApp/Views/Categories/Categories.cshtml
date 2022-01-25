@@ -5,6 +5,8 @@
 }
 
 <div class="row">
+   
+    <br/>
     <div class="col-md-12">
         <div class="card white-box p-0">
             <div class="card-heading">
@@ -51,13 +53,13 @@
                                         </form>
                                     </td>
                                 </tr>
-
                             }
 
-
                         </tbody>
-
                     </table>
+                    <a asp-action="CreateCategory" class="btn btn-sm btn-secondary">Add</a>
+                    <br/>
+                    <br/>
                     @(await Component.InvokeAsync<PagerViewComponent>(Model))
                 </div>
             </div>

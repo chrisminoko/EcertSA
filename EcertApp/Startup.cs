@@ -1,6 +1,7 @@
 using EcertApp.Data;
 using EcertApp.EcertApiHelper.Implementations;
 using EcertApp.EcertApiHelper.Interfaces;
+using EcertApp.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,7 @@ namespace EcertApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ApiUrl>(Configuration.GetSection("ApiUrl"));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
