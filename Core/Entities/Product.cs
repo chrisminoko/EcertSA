@@ -23,7 +23,6 @@ namespace Core.Entities
         [Required(ErrorMessage = "Price is a required field")]
         public double Price { get; set; }
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
         public string UserEmail { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         [DisplayName("Image Name")]

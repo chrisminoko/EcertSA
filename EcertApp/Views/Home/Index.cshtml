@@ -1,6 +1,7 @@
 ﻿@{ 
 
     var Categories = ViewBag.Categories;
+    var products= ViewBag.Products;
 }
 <div class="row">
   
@@ -10,7 +11,29 @@
                 <h3 class="box-title mb-0">Recent Products</h3>
             </div>
             <div class="comment-widgets">
-     
+                <table class="table table-striped table-bordered zero-configuration">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in products)
+                        {
+                            <tr>
+                                <td>@product.ProductName</td>
+                                <td>@product.ProductCode</td>
+                                <td>@product.CategoryName</td>
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+
+                </table>
             </div>
         </div>
     </div>

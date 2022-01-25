@@ -20,18 +20,26 @@ namespace EcertAPI.Controllers
             _repository = repository;
             _logger = logger;
         }
+
+        [HttpGet]
+        public IActionResult GetProducts()
+        {
+            var products = _repository.Product.GetAllProducts(trackChanges: false);
+            return Ok(products);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
-            var company = _repository.Product.GetProduct(id, trackChanges: false);
-            if (company == null)
+            var products = _repository.Product.GetProduct(id, trackChanges: false);
+            if (products == null)
             {
                 _logger.LogInfo($"Product with id : {id} doesn't exist in the database.");
                 return NotFound();
             }
             else
             {
-                return Ok(company);
+                return Ok(products);
             }
         }
 

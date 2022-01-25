@@ -15,6 +15,7 @@ namespace EcertApp.Controllers
         public ProductsController(IProductBll db, ILoggerManager logger)
         {
             _db = db;
+            _logger = logger;
         }
         public IActionResult CreateProduct()
         {
@@ -26,7 +27,7 @@ namespace EcertApp.Controllers
             try
             {
                 _db.CreateProduct(product);
-                return RedirectToAction("Categories");
+                return RedirectToAction("Products");
             }
             catch (System.Exception ex)
             {
@@ -34,6 +35,37 @@ namespace EcertApp.Controllers
                 _logger.LogError($"Something went wrong : { ex.Message} ");
                 return BadRequest();
             }
+        }
+
+        public IActionResult Products(int page = 1)
+        {
+            try
+            {
+                var pagedData = _db.GetProducts(page);
+                return View(pagedData);
+            }
+            catch (System.Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong : { ex.Message} ");
+                return BadRequest();
+            }
+
+        }
+        public IActionResult GetProduct(int id)
+        {
+            try
+            {
+                var results = _db.GetProduct(id);
+                ViewBag.Products = results;
+                return View();
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError($"Something went wrong : { ex.Message} ");
+                return BadRequest();
+            }
+
         }
     }
 }

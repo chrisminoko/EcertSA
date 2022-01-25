@@ -26,22 +26,22 @@ namespace EcertAPI.Controllers
         [HttpGet]
         public IActionResult GetCategories()
         {
-            var companies = _repository.Category.GetAllCategories(trackChanges: false);
-            return Ok(companies);
+            var categories = _repository.Category.GetAllCategories(trackChanges: false);
+            return Ok(categories);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetCategory(int id)
         {
-            var company = _repository.Category.GetCategory(id, trackChanges: false);
-            if (company == null)
+            var category = _repository.Category.GetCategory(id, trackChanges: false);
+            if (category == null)
             {
                 _logger.LogInfo($"Category with id : {id} doesn't exist in the database.");
                 return NotFound();
             }
             else
             {
-                return Ok(company);
+                return Ok(category);
             }
         }
 

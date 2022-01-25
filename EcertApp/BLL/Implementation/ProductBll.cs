@@ -41,7 +41,7 @@ namespace EcertApp.BLL.Implementation
                 ProductCode = product.ProductCode,
                 Price = product.Price,
                 ImageName = product.ImageName,
-                CategoryId = 22,
+                CategoryId = product.CategoryId,
                 Description = product.Description,
                 UserEmail = product.UserEmail,
                 ProductName = product.ProductName,
@@ -53,17 +53,33 @@ namespace EcertApp.BLL.Implementation
 
         public void DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            var baseurl = _appSettings.Value.BaseUrl + $"Products/{productId}";
+            _http.Delete(baseurl);
         }
 
         public Product GetProduct(int id)
         {
-            throw new NotImplementedException();
+            var baseurl = _appSettings.Value.BaseUrl + "Products/";
+            return _http.GetbyId(id, baseurl).Result;
         }
 
         public PagedResult<Product> GetProducts(int page)
         {
-            throw new NotImplementedException();
+            var baseurl = _appSettings.Value.BaseUrl + "Products";
+            var results = _http.Get(baseurl).Result.ToList();
+            var pagedData = results.GetPaged(page, 10);
+            PagedResult<Models.Product> pagedResult = new()
+            {
+                CurrentPage = pagedData.CurrentPage,
+                PageCount = pagedData.PageCount,
+                RowCount = pagedData.RowCount
+            };
+
+            foreach (var category in pagedData.Results)
+            {
+                pagedResult.Results.Add(category);
+            }
+            return pagedData;
         }
     }
 }
