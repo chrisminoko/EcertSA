@@ -11,5 +11,6 @@ namespace EcertApp.EcertApiHelper.Implementations
         Task<string> PostCall(T Entity, string url);
         Task<IEnumerable<T>> Get(string url);
         Task<T> GetbyId(int id, string url);
+        Task<string> Delete(string url);
     }
 }

@@ -17,6 +17,13 @@ namespace EcertApp.EcertApiHelper.Implementations
             _http = http;
         }
 
+        public async Task<string> Delete(string url)
+        {
+            var httpClient = _http.HttpClient();
+            var response = await httpClient.DeleteAsync(url);
+            return response.StatusCode.ToString();
+        }
+
         public async Task<IEnumerable<T>> Get(string url)
         {
             var httpClient = _http.HttpClient();

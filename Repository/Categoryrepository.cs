@@ -27,5 +27,7 @@ namespace Repository
         .SingleOrDefault();
 
         public void CreateCategory(Category category) => Create(category);
+
+        public void DeleteCategory(Category category) { Delete(category); }
     }
 }

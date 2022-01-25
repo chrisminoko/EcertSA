@@ -22,7 +22,6 @@ namespace EcertAPI.Controllers
             _logger = logger;
         }
 
-     
 
         [HttpGet]
         public IActionResult GetCategories()
@@ -59,5 +58,22 @@ namespace EcertAPI.Controllers
             return Ok();
             //return CreatedAtRoute("CategoryById", new { id = category.CategoryId }, category);
         }
-    }
+
+        [HttpDelete("{categoryId}")]
+        public IActionResult DeleteCategory(int categoryId)
+        {
+            var category = _repository.Category.GetCategory(categoryId, trackChanges: false);
+            if (category != null)
+            {
+                _repository.Category.DeleteCategory(category);
+                _repository.Save();
+                return Ok();
+            }
+            else
+            {
+                _logger.LogError("category object sent from client is null.");
+                return NoContent();
+            };
+        }
+     }
 }

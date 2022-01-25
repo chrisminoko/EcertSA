@@ -27,7 +27,7 @@ namespace EcertApp.Controllers
 
         public IActionResult Index()
         {
-            var results = _http.Get("https://localhost:44335/api/Categories").Result.ToList();
+            var results = _http.Get("https://localhost:44335/api/Categories").Result.ToList().Take(3).OrderBy(x=>x.CategoryId);
             ViewBag.Categories = results;
             return View(results);
            

@@ -62,12 +62,12 @@ namespace EcertApp.Controllers
             ViewBag.Category = results;
             return View();
         }
-
-        public IActionResult DeleteCategory(int id)
+       
+        public IActionResult DeleteCategory(int CategoryId)
         {
-            var baseurl = _appSettings.Value.BaseUrl + "Categories/";
-            var results = _http.GetbyId(id, baseurl).Result;
-            ViewBag.Category = results;
+            var baseurl = _appSettings.Value.BaseUrl + $"Categories/{CategoryId}";
+            var results = _http.Delete( baseurl);
+      
             return RedirectToAction("Categories");
         }
     }
